@@ -1,23 +1,100 @@
-2)    Predicted throughput:
-      Predicted latency:
+2)    Predicted throughput: 20 Mbps
+
+      Predicted latency: 120 ms ( 60 ms one way latency)
+
+      Actual throughput: 18.421 Mbps
+
+      Actual latency: 120.972 ms
+
+      Explanation of results:
+      I predicted the throughput would just be the minimum 
+      The throughput was close to the predicted value but slightly lower, 
+      likely due to network bottlenecks along shared links, 
+      particularly L1 (between s1 and s2), which has a bandwidth of 20 Mbps. 
+      Since multiple flows may have traversed this link, 
+      queuing delays and processing delays at switches could have reduced overall throughput. 
+      The latency remained close to the prediction, 
+      indicating that propagation delays were the dominant factor, 
+      with minimal queuing effects.
+
+
+3.1)  Predicted throughput: 10 Mbps
+
+      Predicted latency:  120 ms ( 60 ms one way latency)
+
       Actual throughput:
-      Actual latency:
+      (Using my own iPerfer)
+          - h1 to h10: 16.577 Mbps
+          - h2 to h9: 4.271 Mbps
+
+      Actual latency: 
+          - h1 to h10: 121.038 ms
+          - h2 to h9: 120.764 ms
+
       Explanation of results:
 
-3.1)  Predicted throughput:
-      Predicted latency:
+      In this test, h1 to h10 experienced higher throughput than 
+      h2 to h9 due to the bottleneck at L2 (s2 to s3), which has a bandwidth of 40 Mbps.
+       This shared link likely became congested, and the order in which iPerfer was run might 
+       have contributed to the uneven bandwidth distribution. The first iPerfer pair (h1 to h10) might 
+       have occupied more of the available bandwidth, leaving less for h2 to h9. 
+       This uneven distribution is typical in TCP congestion control scenarios, 
+       where one flow dominates. Despite these issues, latencies remained close to predicted values, 
+       suggesting that queuing delays were not severe.
+
+      
+
+
+3.2)  Predicted throughput: 6.66 Mbps
+
+      Predicted latency: 120 ms ( 60 ms one way latency)
+
       Actual throughput:
+      (Using my own iPerfer)
+          - h1 to h10: 15.752 Mbps
+          - h2 to h9:  3.863 Mbps
+          - h5 to h6:  2.419 Mbps
+      
       Actual latency:
+          - h1 to h10: 121.084 ms
+          - h2 to h9:  121.096 ms
+          - h5 to h6:  121.098 ms
+         
       Explanation of results:
 
-3.2)  Predicted throughput:
-      Predicted latency:
-      Actual throughput:
-      Actual latency:
-      Explanation of results:
+      With three pairs of hosts communicating simultaneously, the bandwidth was divided among more flows, 
+      leading to lower throughput for each pair. The bottlenecks at L1 (20 Mbps) 
+      and L2 (40 Mbps) became more pronounced as multiple flows traversed these links. 
+      The order in which iPerfer was run could have played a role, 
+      with earlier flows securing more bandwidth. Additionally, 
+      queuing delays and processing delays at switches would have increased as more 
+      traffic passed through the shared links. Latency remained near predicted values, 
+      implying that propagation delays were still dominant, but minor queuing effects may 
+      have contributed to slight increases in delay.
 
-4)    Predicted throughput:
+
+4)    Predicted throughput: Both 12.5 Mbps
+
       Predicted latency:
+          - h1 to h10:  120 ms ( 60 ms one way latency)
+          - h3 to h8:   30  ms ( 15 ms one way latency )      
+
       Actual throughput:
+      (Using my own iPerfer)
+          - h1 to h10: 16.892 Mbps 
+          - h3 to h8:  7.449 Mbps
+
       Actual latency:
+          - h1 to h10:  120.568 ms 
+          - h3 to h8:   31.134  ms 
+
       Explanation of results:
+            The actual throughput for h1 to h10 exceeded the prediction, 
+            while h3 to h8 received less bandwidth than expected, likely 
+            due to bottlenecks at shared links such as L2 and L4. 
+            The order in which iPerfer was run could explain why h1 to h10 
+            achieved higher throughput, as earlier connections may have 
+            monopolized more bandwidth before congestion set in. 
+            Queuing delays and processing delays at the switches, 
+            particularly on shared links, would have caused h3 to h8 
+      
